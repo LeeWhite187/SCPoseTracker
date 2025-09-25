@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCPoseTracker_Capture_WIN", "SCPoseTracker_Capture_WIN\SCPoseTracker_Capture_WIN.csproj", "{BA29B6B7-95C3-4B24-9919-D19AFD17C5D5}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SCPoseTracker_Capture_SP", "SCPoseTracker_Capture_SP\SCPoseTracker_Capture_SP.shproj", "{4E2E05E2-F7CF-47B3-845B-E6FF582A582A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCPoseTracker_Capture_LINUX", "SCPoseTracker_Capture_LINUX\SCPoseTracker_Capture_LINUX.csproj", "{B841D8C9-42BD-49EC-AE03-DE9550286070}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA29B6B7-95C3-4B24-9919-D19AFD17C5D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA29B6B7-95C3-4B24-9919-D19AFD17C5D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA29B6B7-95C3-4B24-9919-D19AFD17C5D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA29B6B7-95C3-4B24-9919-D19AFD17C5D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B841D8C9-42BD-49EC-AE03-DE9550286070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B841D8C9-42BD-49EC-AE03-DE9550286070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B841D8C9-42BD-49EC-AE03-DE9550286070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B841D8C9-42BD-49EC-AE03-DE9550286070}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF0459AF-A404-4E6F-8516-DDDA9E5120D3}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SCPoseTracker_Capture_SP\SCPoseTracker_Capture_SP.projitems*{4e2e05e2-f7cf-47b3-845b-e6ff582a582a}*SharedItemsImports = 13
+		SCPoseTracker_Capture_SP\SCPoseTracker_Capture_SP.projitems*{b841d8c9-42bd-49ec-ae03-de9550286070}*SharedItemsImports = 5
+		SCPoseTracker_Capture_SP\SCPoseTracker_Capture_SP.projitems*{ba29b6b7-95c3-4b24-9919-d19afd17c5d5}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal
