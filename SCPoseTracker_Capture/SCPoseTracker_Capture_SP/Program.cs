@@ -17,6 +17,8 @@ namespace SCPoseTracker_Capture
             // Adjust index if needed
             using var video = new VideoStreamManager(0);
             video.FrameReceived += OnFrameReceived;
+            //video.EnableFrameSaving("frames");
+            video.DisableFrameSaving();
 
 
             Stopwatch streamClock = new();

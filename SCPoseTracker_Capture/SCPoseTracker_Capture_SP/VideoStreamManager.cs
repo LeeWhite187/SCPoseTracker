@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Threading;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
+using SCPoseTracker_CaptureS;
 
 namespace SCPoseTracker_Capture
 {
@@ -15,6 +16,8 @@ namespace SCPoseTracker_Capture
         private int _deviceIndex;
         private volatile int _framecount;
 
+        private FrameSaver? _frameSaver;
+        private int _frameIndex = 0;
 
         public bool IsConnected { get; private set; }
 
@@ -97,6 +100,15 @@ namespace SCPoseTracker_Capture
             IsRunning = false;
         }
 
+        public void EnableFrameSaving(string outputDir)
+        {
+            _frameSaver = new FrameSaver(outputDir);
+        }
+        public void DisableFrameSaving()
+        {
+            _frameSaver = null;
+        }
+
         private void CaptureLoop(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
@@ -148,11 +160,16 @@ namespace SCPoseTracker_Capture
 
                         // Raise the event
                         FrameReceived?.Invoke(bmp, LastFrameTimestamp.Value);
+
+                        if (_frameSaver != null)
+                        {
+                            _frameSaver?.SaveFrame(bmp, DateTime.UtcNow, Interlocked.Increment(ref _frameIndex));
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[VideoStreamManager]                              Frame error: {ex.Message}");
+                    Console.WriteLine($"[VideoStreamManager] Frame error: {ex.Message}");
                     IsConnected = false;
                 }
             }

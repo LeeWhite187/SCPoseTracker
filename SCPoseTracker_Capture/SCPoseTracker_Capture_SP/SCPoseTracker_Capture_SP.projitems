@@ -6,9 +6,10 @@
     <SharedGUID>4e2e05e2-f7cf-47b3-845b-e6ff582a582a</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>SCPoseTracker_Capture_SP</Import_RootNamespace>
+    <Import_RootNamespace>SCPoseTracker_Capture</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)FrameSaver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Program.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VideoStreamManager.cs" />
   </ItemGroup>
