@@ -9,6 +9,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SCPoseTracker_Capture_SP", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCPoseTracker_Capture_LINUX", "SCPoseTracker_Capture_LINUX\SCPoseTracker_Capture_LINUX.csproj", "{B841D8C9-42BD-49EC-AE03-DE9550286070}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugOverlay_OCRTest", "DebugOverlay_OCRTest\DebugOverlay_OCRTest.csproj", "{70B4F09E-7C93-4C3D-A804-C66EE649BC5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{B841D8C9-42BD-49EC-AE03-DE9550286070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B841D8C9-42BD-49EC-AE03-DE9550286070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B841D8C9-42BD-49EC-AE03-DE9550286070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B4F09E-7C93-4C3D-A804-C66EE649BC5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B4F09E-7C93-4C3D-A804-C66EE649BC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B4F09E-7C93-4C3D-A804-C66EE649BC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B4F09E-7C93-4C3D-A804-C66EE649BC5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

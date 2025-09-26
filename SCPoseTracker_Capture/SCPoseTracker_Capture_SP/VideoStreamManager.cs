@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Threading;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
-using SCPoseTracker_CaptureS;
+using SCPoseTracker_Capture;
 
 namespace SCPoseTracker_Capture
 {
@@ -18,6 +18,8 @@ namespace SCPoseTracker_Capture
 
         private FrameSaver? _frameSaver;
         private int _frameIndex = 0;
+
+        private bool _capturesingleframe;
 
         public bool IsConnected { get; private set; }
 
@@ -43,6 +45,8 @@ namespace SCPoseTracker_Capture
             {
                 if (IsRunning)
                     return true;
+
+                _capturesingleframe = false;
 
                 _cts = new CancellationTokenSource();
 
@@ -83,6 +87,8 @@ namespace SCPoseTracker_Capture
 
         public void Stop()
         {
+            _capturesingleframe = false;
+
             try
             {
                 _cts?.Cancel();
@@ -100,13 +106,23 @@ namespace SCPoseTracker_Capture
             IsRunning = false;
         }
 
+        public void CaptureSingleFrame(string outputDir)
+        {
+            _frameSaver = new FrameSaver(outputDir);
+
+            this._capturesingleframe = true;
+        }
+
         public void EnableFrameSaving(string outputDir)
         {
             _frameSaver = new FrameSaver(outputDir);
+
+            _capturesingleframe = false;
         }
         public void DisableFrameSaving()
         {
             _frameSaver = null;
+            _capturesingleframe = false;
         }
 
         private void CaptureLoop(CancellationToken token)
@@ -119,6 +135,9 @@ namespace SCPoseTracker_Capture
                     {
                         _capture = new VideoCapture(_deviceIndex);
                         _capture.ImageGrabbed += OnImageGrabbed;
+                        // Set resolution to 3840x2160 (4K UHD)
+                        _capture.Set(Emgu.CV.CvEnum.CapProp.FrameWidth, 3840);
+                        _capture.Set(Emgu.CV.CvEnum.CapProp.FrameHeight, 2160);
                         _capture.Start();
                         IsConnected = true;
                         Console.WriteLine("[VideoStreamManager] Stream started.");
@@ -157,13 +176,24 @@ namespace SCPoseTracker_Capture
                         Interlocked.Increment(ref _framecount);
 
                         var bmp = mat.ToBitmap();
-
-                        // Raise the event
-                        FrameReceived?.Invoke(bmp, LastFrameTimestamp.Value);
-
-                        if (_frameSaver != null)
+                        if(bmp != null)
                         {
-                            _frameSaver?.SaveFrame(bmp, DateTime.UtcNow, Interlocked.Increment(ref _frameIndex));
+                            // Raise the event
+                            FrameReceived?.Invoke(bmp, LastFrameTimestamp.Value);
+
+                            if (_frameSaver != null)
+                            {
+                                _frameSaver?.SaveFrame(bmp, DateTime.UtcNow, Interlocked.Increment(ref _frameIndex));
+                            }
+
+                            // See if we are to only capture a single frame...
+                            if(this._capturesingleframe)
+                            {
+                                // Capturing a single frame.
+                                // We can close the frame saver.
+
+                                this.DisableFrameSaving();
+                            }
                         }
                     }
                 }

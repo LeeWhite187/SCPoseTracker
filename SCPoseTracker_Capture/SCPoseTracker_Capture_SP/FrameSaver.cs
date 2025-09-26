@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SCPoseTracker_CaptureS
+namespace SCPoseTracker_Capture
 {
     public class FrameSaver
     {

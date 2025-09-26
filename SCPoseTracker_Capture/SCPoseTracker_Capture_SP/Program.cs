@@ -4,22 +4,24 @@ using System.Diagnostics;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Drawing;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
+using SCPoseTracker_Capture;
 
 namespace SCPoseTracker_Capture
 {
     public class Program
     {
+
         static int Main(string[] args)
         {
             var cts = new CancellationTokenSource();
-
 
             // Adjust index if needed
             using var video = new VideoStreamManager(0);
             video.FrameReceived += OnFrameReceived;
             //video.EnableFrameSaving("frames");
             video.DisableFrameSaving();
-
 
             Stopwatch streamClock = new();
             int frameCount = 0;
@@ -33,8 +35,7 @@ namespace SCPoseTracker_Capture
                 cts.Cancel();
                 video.Stop();
             };
-
-
+            
             Console.Clear();
             Console.CursorVisible = false;
             Console.WriteLine("Starting video stream...");
@@ -51,6 +52,30 @@ namespace SCPoseTracker_Capture
             {
                 DrawStatus(video);
                 Task.Delay(250).GetAwaiter();
+
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey(intercept: true);
+                    if (key.Key == ConsoleKey.C)
+                    {
+                        video.CaptureSingleFrame("frames");
+                    }
+                    else if (key.Key == ConsoleKey.E)
+                    {
+                        video.EnableFrameSaving("frames");
+                    }
+                    else if (key.Key == ConsoleKey.D)
+                    {
+                        video.DisableFrameSaving();
+                    }
+                    else if (key.Key == ConsoleKey.Escape)
+                    {
+                        cts.Cancel();
+                        video.Stop();
+
+                        return 0;
+                    }
+                }
             }
 
             Console.WriteLine("\nVideo stream ended.");
